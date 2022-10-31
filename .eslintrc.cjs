@@ -10,6 +10,8 @@ module.exports = {
     '@vue/eslint-config-prettier'
   ],
   parserOptions: {
-    ecmaVersion: 'latest'
+    ecmaVersion: 'latest',
+    semicolon: false,
+    quotes: ["error", "single", { "avoidEscape": true, "allowTemplateLiterals": false }],
   }
 }
