@@ -1,12 +1,18 @@
 <script setup lang="ts"></script>
 
 <template>
-  <footer>footer</footer>
+  <footer>
+    <div class="container">
+      © Some copyright text
+    </div>
+  </footer>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import "../assets/variables";
 footer {
-  background-color: gainsboro;
+  background-color: $primary;
   padding: 16px;
+  color: white;
 }
 </style>

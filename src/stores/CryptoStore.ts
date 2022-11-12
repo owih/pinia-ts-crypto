@@ -1,34 +1,56 @@
 import { defineStore } from "pinia";
-import axios from "axios";
+import { fetchCryptosApi } from "../api/cryptoApi";
 
 export type Crypto = {
-  USD: number;
+  name: string;
+  price: number;
+  img: string;
+  changes: number;
 };
 
 export const useCryptoStore = defineStore("crypto-store", {
   state: () => ({
-    cryptos: {} as Crypto,
-    chosenList: ["BTC", "ETH"] as String[],
+    cryptos: [] as Crypto[] | [],
+    chosenList: [] as string[],
+    loading: true as boolean,
   }),
   getters: {
-    getCryptos(): object {
+    getCryptos(): Crypto[] {
       return this.cryptos;
     },
+    getIsCryptoWasChosen(): (cryptoName: string) => boolean {
+      return (cryptoName: string) => !!this.chosenList.find((item) => item === cryptoName);
+    },
+    getLoadingState(): boolean {
+      return this.loading;
+    }
   },
   actions: {
     async fetchCryptos() {
-      const queries = this.chosenList.join(",");
-      axios
-        .get(
-          `https://min-api.cryptocompare.com/data/pricemulti?fsyms=${queries}&tsyms=USD`
-        )
-        .then((res): void => {
-          console.log(res.data);
-          this.cryptos = res.data;
+      this.loading = true;
+      const queries: string = this.chosenList.join(",");
+      fetchCryptosApi(queries)
+        .then((res) => {
+          this.cryptos = res;
+          this.loading = false;
         })
-        .catch((e): never => {
-          throw Error(e.message);
-        });
+        .catch((): void => { this.loading = false })
+        .finally(() => this.loading = false)
     },
+    addChosenCrypto(cryptoName: string): void {
+      this.chosenList.push(cryptoName);
+    },
+    removeCrypto(cryptoName: string): void {
+      this.chosenList = this.chosenList.filter((item) => item !== cryptoName);
+      this.cryptos = this.cryptos.filter((item) => item.name !== cryptoName);
+    },
+    saveStateToLocalStorage(): void {
+      localStorage.removeItem('chosenCryptos');
+      localStorage.setItem('chosenCryptos', this.chosenList.toString());
+    },
+    setStateFromLocalStorage(): void {
+      const storage: string | null = localStorage.getItem('chosenCryptos');
+      this.chosenList = storage ? storage.split(',') : [];
+    }
   },
 });

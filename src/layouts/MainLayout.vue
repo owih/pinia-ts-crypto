@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import HeaderVue from "../../src/components/HeaderVue.vue";
 import FooterVue from "../../src/components/FooterVue.vue";
+const props = defineProps({
+  title: String,
+})
 </script>
 
 <template>
@@ -8,6 +11,7 @@ import FooterVue from "../../src/components/FooterVue.vue";
     <HeaderVue />
     <main>
       <div class="container">
+        <h1 class="title">{{ title }}</h1>
         <slot></slot>
       </div>
     </main>

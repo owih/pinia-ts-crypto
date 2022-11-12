@@ -1,10 +1,46 @@
 <script setup lang="ts">
 import MainLayout from "../layouts/MainLayout.vue";
-import CryptoList from "../components/CryptoList.vue";
 </script>
 
 <template>
-  <MainLayout>
-    <CryptoList />
+  <MainLayout title="Menu">
+    <div class="menu">
+      <div class="menu__item">
+        <router-link class="menu__link" :to="{name: 'crypto'}">Crypto App</router-link>
+      </div>
+      <div class="menu__item">
+        <router-link class="menu__link" :to="{name: 'stock'}">Stock App</router-link>
+      </div>
+    </div>
   </MainLayout>
 </template>
+
+<style scoped lang="scss">
+@import "../assets/variables";
+.menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: -16px;
+  &__item {
+    padding: 16px;
+  }
+  &__link {
+    display: flex;
+    background-color: $primary;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    text-decoration: none;
+    border: 1px solid lightgrey;
+    border-radius: 12px;
+    width: 200px;
+    height: 200px;
+    transition: $transition-base;
+    &:hover {
+      background-color: $green;
+    }
+  }
+}
+</style>
