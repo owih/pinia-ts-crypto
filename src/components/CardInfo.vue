@@ -20,7 +20,7 @@ const props = defineProps({
   img: {
     type: String,
   },
-})
+});
 </script>
 
 <template>
@@ -35,11 +35,11 @@ const props = defineProps({
       <div class="card__price">
         <span>{{ price.toFixed(4) }}</span> USD
       </div>
-      <div class="card__changes">
-        {{ changes.toFixed(2) }} USD
+      <div v-if="changes" class="card__changes">
+        {{ changes ? changes.toFixed(2) : '' }} USD
       </div>
     </div>
-    <div class="card__remove" @click="this.$emit('removeItem', name)">
+    <div class="card__remove" @click="$emit('removeItem', name)">
       Remove
     </div>
   </div>
