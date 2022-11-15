@@ -11,5 +11,5 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  base: 'pinia-ts-crypto',
+  base: '/pinia-ts-crypto/',
 });
