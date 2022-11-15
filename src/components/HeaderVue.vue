@@ -38,12 +38,15 @@ header {
   &__link {
     text-decoration: none;
     color: white;
-    padding: 4px 8px;
+    padding: 4px 0;
     border-radius: 6px;
     transition: $transition-base;
     &:hover {
       background-color: white;
       color: $primary;
+    }
+    @media (min-width: 576px) {
+      padding: 4px 8px;
     }
   }
 }

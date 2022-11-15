@@ -8,15 +8,17 @@ const cryptoName = ref('');
 
 function addCryptoProcess(): void {
   const isExists = cryptoStore.getIsCryptoWasChosen(cryptoName.value);
-  if (cryptoName.value === '' || isExists) {
+  if (cryptoName.value.trim() === '' || isExists) {
     notify({
       title: 'Incorrect crypto or this one was already added',
       type: 'error'
     })
+    cryptoName.value = '';
     return;
   }
-  cryptoStore.addChosenCrypto(cryptoName.value);
+  cryptoStore.addChosenCrypto(cryptoName.value.trim().toLowerCase());
   cryptoStore.fetchCryptos();
+  cryptoName.value = '';
 }
 </script>
 

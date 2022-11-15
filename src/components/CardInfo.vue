@@ -30,13 +30,13 @@ const props = defineProps({
     </div>
     <div class="card__right">
       <div class="card__name">
-        {{ name }}<span>|</span>{{ symbol }}
+        {{ name }}
       </div>
       <div class="card__price">
         <span>{{ price.toFixed(4) }}</span> USD
       </div>
       <div v-if="changes" class="card__changes">
-        {{ changes ? changes.toFixed(2) : '' }} USD
+        {{ changes ? changes.toFixed(6) : '' }} USD
       </div>
     </div>
     <div class="card__remove" @click="$emit('removeItem', name)">

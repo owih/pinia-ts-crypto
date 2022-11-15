@@ -5,11 +5,15 @@ import MainLayout from "../layouts/MainLayout.vue";
 <template>
   <MainLayout title="Menu">
     <div class="menu">
-      <div class="menu__item">
-        <router-link class="menu__link" :to="{name: 'crypto'}">Crypto App</router-link>
-      </div>
-      <div class="menu__item">
-        <router-link class="menu__link" :to="{name: 'stock'}">Stock App</router-link>
+      <div class="container">
+        <div class="menu__row">
+          <div class="menu__item">
+            <router-link class="menu__link" :to="{name: 'crypto'}">Crypto App</router-link>
+          </div>
+          <div class="menu__item">
+            <router-link class="menu__link" :to="{name: 'stock'}">Stock App</router-link>
+          </div>
+        </div>
       </div>
     </div>
   </MainLayout>
@@ -18,10 +22,16 @@ import MainLayout from "../layouts/MainLayout.vue";
 <style scoped lang="scss">
 @import "../assets/variables";
 .menu {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: -16px;
+  &__row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: -16px;
+    flex-direction: column;
+    @media (min-width: 576px) {
+      flex-direction: row;
+    }
+  }
   &__item {
     padding: 16px;
   }
